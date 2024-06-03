@@ -49,3 +49,7 @@ header{
     height: 12px;
     border-radius: 999px;
 }
+
+.main{
+    padding: 12px 24px;
+}
