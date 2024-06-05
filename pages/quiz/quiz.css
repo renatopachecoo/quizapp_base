@@ -193,7 +193,7 @@ main{
     }
 }
 
-.alternativas label#correta{
+.alternativas label#correta {
     outline: 3px solid var(--green);
 
     & span{
@@ -201,13 +201,12 @@ main{
         color: var(--white);
     }
 }
-
 .alternativas label#errada {
     outline: 3px solid var(--red);
 
     & span{
         background: var(--red);
-        color: white;
+        color: var(--white);
     }
 }
 
