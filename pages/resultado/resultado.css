@@ -55,7 +55,23 @@ header{
     gap: 16px;
 }
 
-.assunto_icone{
+.assunto_icon.html{
+    background: var(--bg-html);
+}
+
+.assunto_icon.css{
+    background: var(--bg-css);
+}
+
+.assunto_icon.javascript{
+    background: var(--bg-javascript);
+}
+
+.assunto_icon.acecibilidade{
+    background: var(--bg-acecibilidade);
+}
+
+.assunto_icon{
     background: var(--bg-acecibilidade);
     width: 40px;
     height: 40px;
@@ -63,7 +79,7 @@ header{
     border-radius: 5px;
 }
 
-.assunto_icone img{
+.assunto_icon img{
     width: 100%;
 }
 
@@ -172,7 +188,7 @@ main button:hover{
         margin-inline: auto;
     }
     
-    .assunto_icone{
+    .assunto_icon{
         width: 56px;
         height: 56px;
         padding: 8px;
