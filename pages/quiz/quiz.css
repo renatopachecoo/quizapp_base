@@ -57,15 +57,30 @@ header{
     gap: 16px;
 }
 
-.assunto_icone{
-    background: var(--bg-acecibilidade);
+.assunto_icon{
     width: 40px;
     height: 40px;
     padding: 5px;
     border-radius: 5px;
 }
 
-.assunto_icone img{
+.assunto_icon.html{
+    background: var(--bg-html);
+}
+
+.assunto_icon.css{
+    background: var(--bg-css);
+}
+
+.assunto_icon.javascript{
+    background: var(--bg-javascript);
+}
+
+.assunto_icon.acecibilidade{
+    background: var(--bg-acecibilidade);
+}
+
+.assunto_icon img{
     width: 100%;
 }
 
