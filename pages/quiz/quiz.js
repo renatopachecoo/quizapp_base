@@ -1,23 +1,18 @@
 import { trocarTema, verificarTema } from "../../helpers/tema-helper.js"
 
+
 const botaoTema = document.querySelector(".tema button")
 const body = document.querySelector("body")
 const assunto = localStorage.getItem("assunto")
-
-let quiz = {}
-let pontos = 0
-let pergunta = 1
-let resposta = ""
-let idInputResposta = ""
-let respostaCorretaId = ""
+const botaoJogarNovamente = document.querySelector("main button")
 
 botaoTema.addEventListener("click", () => {
     trocarTema(body, botaoTema)
 })
 
+botaoJogarNovamente.addEventListener("click", jogarNovamente)
+
 verificarTema(body, botaoTema)
-
-
 
 function alterarAssunto(){
     const divIcon = document.querySelector(".assunto_icon")
@@ -30,141 +25,27 @@ function alterarAssunto(){
     assuntoTitulo.innerHTML = assunto
 }
 
- async function buscarPerguntas(){
-    const urlDados = "../../data.json"
+alterarAssunto()
 
-    await fetch(urlDados).then(resposta => resposta.json()).then(dados => {
-        dados.quizzes.forEach(dado => {
-            if(dado.title === assunto){
-                quiz = dado
-            }
-        });
-    })
-}
+function inserirResultado (){
+    const sectionPontuacao = document.querySelector(".pontuacao")
+    const divAssunto = document.querySelector(".assunto")
+    const pontos = localStorage.getItem("pontos")
 
+    sectionPontuacao.innerHTML = `
+       ${divAssunto.outerHTML}
 
-function montarPergunta(){
-    const main = document.querySelector("main")
+        <strong>${pontos}</strong>
 
-    main.innerHTML = `
-        <section class="pergunta">
-
-            <div>
-                <p>Questão ${pergunta} de 10</p>
-
-                <h2> ${quiz.questions[pergunta-1].question} </h2>
-            </div>
-
-            <div class="barra_progresso">
-                <div style="width: ${pergunta * 10}%"></div>
-            </div>
-        </section>
-
-        <section class="alternativas">
-            <form action="">
-
-                <label for="alternativa_a">
-                    <input type="radio" id="alternativa_a" name="alternativa" value = "${alterarSinais(quiz.questions[pergunta-1].options[0])}">
-
-                    <div>
-                        <span>A</span>
-                        ${alterarSinais(quiz.questions[pergunta-1].options[0])}
-                    </div>
-                </label>
-
-                <label for="alternativa_b">
-                    <input type="radio" id="alternativa_b" name="alternativa" value ="${alterarSinais(quiz.questions[pergunta-1].options[1])}">
-
-                    <div>
-                        <span>B</span>
-                        ${alterarSinais(quiz.questions[pergunta-1].options[1])}
-                    </div>
-                </label>
-                    
-                <label for="alternativa_c">
-                    <input type="radio" id="alternativa_c" name="alternativa" value ="${alterarSinais(quiz.questions[pergunta-1].options[2])}">
-                    <div>
-                        <span>C</span>
-                        ${alterarSinais(quiz.questions[pergunta-1].options[2])}
-                    </div>
-                </label>
-
-                <label for="alternativa_d">
-                    <input type="radio" id="alternativa_d" name="alternativa" value ="${alterarSinais(quiz.questions[pergunta-1].options[3])}">
-                    <div>
-                    <span>D</span>
-                    ${alterarSinais(quiz.questions[pergunta-1].options[3])}
-                    </div>
-                </label>
-            </form>
-
-            <button>Responder</button>
-        </section>
+        <p>de 10</p>
     `
 }
 
-function alterarSinais(texto){
-    return texto.replace(/</g, "&lt;").replace(/>/g, "&gt;")
+function jogarNovamente () {
+    localStorage.removeItem("pontos")
+    localStorage.removeItem("assunto")
+
+    window.location.href = "../../index.html"
 }
 
-function guardarResposta(evento) {
-    resposta = evento.target.value
-    idInputResposta = evento.target.id
-    const botaoEnviar = document.querySelector(".alternativas button")
-    botaoEnviar.addEventListener("click", validarResposta)
-}
-
-function validarResposta() {
-    const botaoEnviar = document.querySelector(".alternativas button")
-    botaoEnviar.innerHTML = "Proxima"
-    botaoEnviar.removeEventListener("click", validarResposta)
-
-    if (pergunta === 10) {
-        botaoEnviar.innerHTML = "Finalizar"
-        botaoEnviar.addEventListener("click", finalizar)
-    }else{
-        botaoEnviar.addEventListener("click", proximaPergunta)
-    }
-
-    if(resposta === quiz.questions[pergunta-1].answer) {
-        document.querySelector(`label[for= '${idInputResposta}']`).setAttribute("id", "correta")
-        pontos = pontos + 1
-    } else {
-        document.querySelector(`label[for= '${idInputResposta}']`).setAttribute("id", "errada")
-        document.querySelector(`label[for= '${respostaCorretaId}']`).setAttribute("id", "correta")
-    }
-    
-    pergunta = pergunta + 1
-    console.log("pontos", pontos)
-}
-
-function proximaPergunta() {
-    montarPergunta()
-    adicionarEventoInputs()
-}
-
-function adicionarEventoInputs() {
-    const inputResposta = document.querySelectorAll(".alternativas input")
-    inputResposta.forEach(input => {
-        input.addEventListener("click", guardarResposta)
-
-        if (input.value === quiz.questions[pergunta-1].answer){
-            respostaCorretaId = input.id
-        }
-    })
-}
-
-function finalizar() {
-    localStorage.setItem("pontos", pontos)
-        
-    window.location.href = "../resultado/resultado.html"
-}
-
-async function iniciar(){
-    alterarAssunto()
-    await buscarPerguntas()
-    montarPergunta()
-    adicionarEventoInputs()
-}
-
-iniciar()
+inserirResultado()
