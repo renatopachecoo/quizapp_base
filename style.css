@@ -16,7 +16,7 @@
     --bg-html:#fff1e9;
     --bg-css:#e0fdef;
     --bg-javascript:#ebf0ff;
-    --bg-acecibilidade:#f6e7ff;
+    --bg-acessibilidade:#f6e7ff;
     --white:#fff;
     --bg-mobile: url(./assets/images/pattern-background-mobile-light.svg);
     --bg-desktop: url(./assets/images/pattern-background-desktop-light.svg);
@@ -144,8 +144,8 @@ main {
     background: var(--bg-javascript);
 }
 
-.botao_acecibilidade div{
-    background: var(--bg-acecibilidade);
+.botao_acessibilidade div{
+    background: var(--bg-acessibilidade);
 }
 
 @media(min-width: 1100px){

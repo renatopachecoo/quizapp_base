@@ -19,7 +19,7 @@
     --bg-html:#fff1e9;
     --bg-css:#e0fdef;
     --bg-javascript:#ebf0ff;
-    --bg-acecibilidade:#f6e7ff;
+    --bg-acessibilidade:#f6e7ff;
     --white:#fff;
     --green:#26d782;
     --red:#ee5454;
@@ -76,8 +76,8 @@ header{
     background: var(--bg-javascript);
 }
 
-.assunto_icon.acecibilidade{
-    background: var(--bg-acecibilidade);
+.assunto_icon.acessibilidade{
+    background: var(--bg-acessibilidade);
 }
 
 .assunto_icon img{
@@ -179,7 +179,7 @@ main{
 
 .alternativas label:hover{
     & span{
-        background: var(--bg-acecibilidade);
+        background: var(--bg-acessibilidade);
         color: var(--purple);
     }
 }
